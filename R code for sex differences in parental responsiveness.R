@@ -1,7 +1,7 @@
 ########### Sex Differences in Parental Responsiveness ###########
 ########### Shana Caro (shana_caro@post.harvard.edu)
 
-rm(list=ls()) # clear R
+rm(list=ls()) # clear R environment
 
 #### Load packages ####
 
@@ -10,21 +10,21 @@ library(mcmcplots)
 library(ape)
 library(coda)
 library(mcgibbsit)
-library(ggplot2)
 library(corrplot)
 library(metafor)
 library(lattice)
 library(phylogram)
 library(ggtree)
-library(phylobase)
-library(stargazer)
 library(tidyverse)
 library(lme4)
 
 ############## Import and Clean Data #############
 
-full_data <- read.csv("full_dataset.csv", header=T, na.strings="", strip.white=T) #you may have to copy the data set into a new csv file, and reset your working directory
+# Download and save the data files "Full Dataset Excel" and the two nex files with the phylogenies. 
+# Save the first sheet of the dataset as an excel or csv file, as you prefer
+# Make sure you've put the data in your correct working directory
 
+full_data <- read.csv("full_dataset.csv", header=T, na.strings="", strip.white=T) #import dataset
 eric_30_trees <- read.nexus("eric_30_output.nex") #import random phylogenetic trees with Erikson backbone
 hackett_30_trees <- read.nexus("eric_30_output.nex") #import random phylogenetic trees with Hackett backbone
 
