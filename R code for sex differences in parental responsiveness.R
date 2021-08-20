@@ -141,7 +141,7 @@ sex_diff_mod_erikson_1 <- MCMCglmm(Z_whole_beg ~ which_parent,
                                      mev = full_data$variance ,
                                      data = full_data,
                                      family = "gaussian", verbose=FALSE, pr=TRUE, slice=TRUE,
-                                     nitt=500000, burnin=200000, thin=100)
+                                     nitt=3000000, burnin=1000000, thin=1000)
   summary(sex_diff_mod_erikson_1)
 sex_diff_mod_hackett_1 <- MCMCglmm(Z_whole_beg ~ which_parent -1, #this will show the mean for males and for females
                                      random = ~ animal, 
@@ -150,7 +150,7 @@ sex_diff_mod_hackett_1 <- MCMCglmm(Z_whole_beg ~ which_parent -1, #this will sho
                                      mev = full_data$variance ,
                                      data = full_data,
                                      family = "gaussian", verbose=FALSE, pr=TRUE, slice=TRUE,
-                                     nitt=300000, burnin=100000, thin=100)
+                                     nitt=3000000, burnin=1000000, thin=1000)
   summary(sex_diff_mod_hackett_1)
 
 ### social bond models ####  
@@ -200,7 +200,7 @@ within_species_model <- MCMCglmm(diff.male.minus.female ~ social_bond_strength,
                                        mev = full_data$variance,
                                        data = full_data,
                                        family = "gaussian", verbose=FALSE, pr=TRUE, slice=TRUE,
-                                       nitt=2000000, burnin=500000, thin=100)
+                                       nitt=3000000, burnin=1000000, thin=1000)
   summary(enviro_sex_diff_mod_full)
 enviro_sex_diff_mod_full2 <- MCMCglmm(Z_whole_beg ~ which_parent*social_bond_strength + which_parent*environment.ord + which_parent*reduction_y_n,
                                         random = ~ animal + study + species, 
@@ -209,7 +209,7 @@ enviro_sex_diff_mod_full2 <- MCMCglmm(Z_whole_beg ~ which_parent*social_bond_str
                                         mev = full_data$variance,
                                         data = full_data,
                                         family = "gaussian", verbose=FALSE, pr=TRUE, slice=TRUE,
-                                        nitt=2000000, burnin=500000, thin=100)
+                                        nitt=3000000, burnin=1000000, thin=1000)
   summary(enviro_sex_diff_mod_full2)
 ### tarsus models ####
 tarsus_sex_diff_mod_full <- MCMCglmm(Z_whole_beg ~ which_parent*tarsus_dimorphism,
@@ -219,7 +219,7 @@ tarsus_sex_diff_mod_full <- MCMCglmm(Z_whole_beg ~ which_parent*tarsus_dimorphis
                                        mev = subset(full_data, tarsus_dimorphism!="")$variance,
                                        data = subset(full_data, tarsus_dimorphism!=""),
                                        family = "gaussian", verbose=FALSE, pr=TRUE, slice=TRUE,
-                                       nitt=2000000, burnin=500000, thin=100)
+                                       nitt=3000000, burnin=1000000, thin=1000)
   summary(tarsus_sex_diff_mod_full)
   tarsus_sex_diff_mod_within <- MCMCglmm(diff.male.minus.female ~ z_tarsus_dimorphism,
                                        random = ~ animal , 
@@ -228,7 +228,7 @@ tarsus_sex_diff_mod_full <- MCMCglmm(Z_whole_beg ~ which_parent*tarsus_dimorphis
                                        mev = subset(data_species_level, z_tarsus_dimorphism!="NaN")$variance,
                                        data = subset(data_species_level, z_tarsus_dimorphism!="NaN"),
                                        family = "gaussian", verbose=FALSE, pr=TRUE, slice=TRUE,
-                                       nitt=2000000, burnin=500000, thin=100)
+                                       nitt=3000000, burnin=1000000, thin=1000)
   summary(tarsus_sex_diff_mod_within) 
   
 ### plumage models ####
@@ -240,7 +240,7 @@ tarsus_sex_diff_mod_full <- MCMCglmm(Z_whole_beg ~ which_parent*tarsus_dimorphis
                                         mev = subset(full_data, z_divorce_rate!="")$variance,
                                         data = subset(full_data, z_divorce_rate!=""),
                                         family = "gaussian", verbose=FALSE, pr=TRUE, slice=TRUE,
-                                        nitt=3000000, burnin=1000000, thin=1000)
+                                        nnitt=3000000, burnin=1000000, thin=1000)
   summary(divorce_sex_diff_mod_full)
   within_divorce <- MCMCglmm(diff.male.minus.female ~ z_divorce_rate,
                              random = ~ animal, 
@@ -271,7 +271,7 @@ tarsus_sex_diff_mod_full <- MCMCglmm(Z_whole_beg ~ which_parent*tarsus_dimorphis
                                       mev = subset(data_species_level, z_mean_perEPP!="NaN")$variance,
                                       data = subset(data_species_level, z_mean_perEPP!="NaN"),
                                       family = "gaussian", verbose=FALSE, pr=TRUE, slice=TRUE,
-                                      nitt=3000000, burnin=1000000, thin=1000)
+                                      nnitt=3000000, burnin=1000000, thin=1000)
   summary(eppBR_sex_diff_mod_full)
 
   eppdiovroce_sex_diff_mod_full <- MCMCglmm(Z_whole_beg ~ which_parent*z_mean_perEPP + which_parent*z_divorce_rate,
@@ -292,7 +292,7 @@ tarsus_sex_diff_mod_full <- MCMCglmm(Z_whole_beg ~ which_parent*tarsus_dimorphis
                                                    mev = subset(data_species_level, z_mean_perEPP!="NaN" & z_divorce_rate!="NaN")$variance,
                                                    data = subset(data_species_level, z_mean_perEPP!="NaN" & z_divorce_rate!="NaN"),
                                                    family = "gaussian", verbose=FALSE, pr=TRUE, slice=TRUE,
-                                                   nitt=2000000, burnin=500000, thin=1000)
+                                                   nitt=3000000, burnin=1000000, thin=1000)
   summary(within_eppdiovroce_sex_diff_mod_full)
   
   INTER_within_eppdiovroce_sex_diff_mod_full <- MCMCglmm(diff.male.minus.female ~ z_divorce_rate * z_mean_perEPP,
@@ -302,7 +302,7 @@ tarsus_sex_diff_mod_full <- MCMCglmm(Z_whole_beg ~ which_parent*tarsus_dimorphis
                                                    mev = subset(data_species_level, z_mean_perEPP!="NaN" & z_divorce_rate!="NaN")$variance,
                                                    data = subset(data_species_level, z_mean_perEPP!="NaN" & z_divorce_rate!="NaN"),
                                                    family = "gaussian", verbose=FALSE, pr=TRUE, slice=TRUE,
-                                                   nitt=2000000, burnin=500000, thin=1000)
+                                                   nitt=3000000, burnin=1000000, thin=1000)
   summary(INTER_within_eppdiovroce_sex_diff_mod_full)
   
 ### hormone models ####
@@ -316,7 +316,7 @@ tarsus_sex_diff_mod_full <- MCMCglmm(Z_whole_beg ~ which_parent*tarsus_dimorphis
                             mev = subset(male_full_data, mean_male_baseline_corticosterone_during_young_care!="")$variance,
                             data = subset(male_full_data, mean_male_baseline_corticosterone_during_young_care!=""),
                             family = "gaussian", verbose=FALSE, pr=TRUE, slice=TRUE,
-                            nitt=100000, burnin=30000, thin=10)
+                            nitt=3000000, burnin=1000000, thin=1000)
   summary(male_BC_model)
   male_BC_model_lm <- lmer(Z_whole_beg ~ mean_male_baseline_corticosterone_during_young_care + (1|common_name), 
                            data = subset(male_full_data, mean_male_baseline_corticosterone_during_young_care!=""))
@@ -330,7 +330,7 @@ tarsus_sex_diff_mod_full <- MCMCglmm(Z_whole_beg ~ which_parent*tarsus_dimorphis
                               mev = subset(data_species_level, mean_female_baseline_corticosterone_during_young_care!="NaN")$variance,
                               data = subset(data_species_level, mean_female_baseline_corticosterone_during_young_care!="NaN"),
                               family = "gaussian", verbose=FALSE, pr=TRUE, slice=TRUE,
-                              nitt=100000, burnin=30000, thin=10)
+                              nitt=3000000, burnin=1000000, thin=1000)
   summary(female_BC_model)
   
   female_BC_model_lm <- lm(Z_whole_beg ~ mean_female_baseline_corticosterone_during_young_care 
@@ -346,7 +346,7 @@ tarsus_sex_diff_mod_full <- MCMCglmm(Z_whole_beg ~ which_parent*tarsus_dimorphis
                              mev = full_data$variance,
                              data = full_data,
                              family = "gaussian", verbose=FALSE, pr=TRUE, slice=TRUE,
-                             nitt=2000000, burnin=1000000, thin=1000)
+                             nitt=3000000, burnin=1000000, thin=1000)
   summary(null_mod_phylo)
 ###### Calculate heritability ####
   # I^2 values
@@ -376,7 +376,7 @@ exp_obs_1 <- MCMCglmm(Z_whole_beg ~ exp_obs,
                         mev = full_data$variance ,
                         data = full_data,
                         family = "gaussian", verbose=FALSE, pr=TRUE, slice=TRUE,
-                        nitt=300000, burnin=100000, thin=100)
+                        nitt=3000000, burnin=1000000, thin=1000)
   summary(exp_obs_1)
   
 beg_variable_1 <- MCMCglmm(Z_whole_beg ~ beg_variable,
@@ -386,7 +386,7 @@ beg_variable_1 <- MCMCglmm(Z_whole_beg ~ beg_variable,
                              mev = full_data$variance ,
                              data = full_data,
                              family = "gaussian", verbose=FALSE, pr=TRUE, slice=TRUE,
-                             nitt=300000, burnin=100000, thin=100)
+                             nitt=3000000, burnin=1000000, thin=1000)
   round(summary(beg_variable_1)$solutions,2)
   
 estimated_1 <- MCMCglmm(Z_whole_beg ~ estimated_test_statistic,
@@ -396,7 +396,7 @@ estimated_1 <- MCMCglmm(Z_whole_beg ~ estimated_test_statistic,
                           mev = full_data$variance ,
                           data = full_data,
                           family = "gaussian", verbose=FALSE, pr=TRUE, slice=TRUE,
-                          nitt=300000, burnin=100000, thin=100)
+                          nitt=3000000, burnin=1000000, thin=1000)
   round(summary(estimated_1)$solutions,2)
   
 beg_mode_1 <- MCMCglmm(Z_whole_beg ~ beg_mode,
@@ -406,7 +406,7 @@ beg_mode_1 <- MCMCglmm(Z_whole_beg ~ beg_mode,
                          mev = full_data$variance ,
                          data = full_data,
                          family = "gaussian", verbose=FALSE, pr=TRUE, slice=TRUE,
-                         nitt=300000, burnin=100000, thin=100)
+                         nitt=3000000, burnin=1000000, thin=1000)
   round(summary(beg_mode_1)$solutions,2)
   
 feed_variable_1 <- MCMCglmm(Z_whole_beg ~ feed_variable,
@@ -416,7 +416,7 @@ feed_variable_1 <- MCMCglmm(Z_whole_beg ~ feed_variable,
                               mev = full_data$variance ,
                               data = full_data,
                               family = "gaussian", verbose=FALSE, pr=TRUE, slice=TRUE,
-                              nitt=300000, burnin=100000, thin=100)
+                              nitt=3000000, burnin=1000000, thin=1000)
   round(summary(feed_variable_1)$solutions,2)
 
 deprivation_1 <- MCMCglmm(Z_whole_beg ~ deprivation,
@@ -426,7 +426,7 @@ deprivation_1 <- MCMCglmm(Z_whole_beg ~ deprivation,
                             mev = full_data$variance ,
                             data = full_data,
                             family = "gaussian", verbose=FALSE, pr=TRUE, slice=TRUE,
-                            nitt=300000, burnin=100000, thin=100)
+                            nnitt=3000000, burnin=1000000, thin=1000)
   round(summary(deprivation_1)$solutions,2)
   
 supplemented_1 <- MCMCglmm(Z_whole_beg ~ supplemented,
@@ -436,7 +436,7 @@ supplemented_1 <- MCMCglmm(Z_whole_beg ~ supplemented,
                              mev = full_data$variance ,
                              data = full_data,
                              family = "gaussian", verbose=FALSE, pr=TRUE, slice=TRUE,
-                             nitt=300000, burnin=100000, thin=100)
+                             nitt=3000000, burnin=1000000, thin=1000)
   round(summary(supplemented_1)$solutions,2)
 
 brood_manipulation_1 <- MCMCglmm(Z_whole_beg ~ brood_manipulation,
@@ -446,7 +446,7 @@ brood_manipulation_1 <- MCMCglmm(Z_whole_beg ~ brood_manipulation,
                                    mev = full_data$variance ,
                                    data = full_data,
                                    family = "gaussian", verbose=FALSE, pr=TRUE, slice=TRUE,
-                                   nitt=300000, burnin=100000, thin=100)
+                                   nnitt=3000000, burnin=1000000, thin=1000)
   round(summary(brood_manipulation_1)$solutions,2)
   
 playback_1 <- MCMCglmm(Z_whole_beg ~ playback,
@@ -456,6 +456,6 @@ playback_1 <- MCMCglmm(Z_whole_beg ~ playback,
                          mev = full_data$variance ,
                          data = full_data,
                          family = "gaussian", verbose=FALSE, pr=TRUE, slice=TRUE,
-                         nitt=300000, burnin=100000, thin=100)
+                         nitt=3000000, burnin=1000000, thin=1000)
   round(summary(playback_1)$solutions,2)
   
